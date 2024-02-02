@@ -1,0 +1,32 @@
+{
+  "root": true,
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "prettier",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json"
+  },
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "import/prefer-default-export": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state"] }
+    ],
+    "no-restricted-exports": "off",
+    "no-underscore-dangle": ["error", { "allow": ["__component"] }],
+    "react/button-has-type": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-no-constructed-context-values": "off",
+    "react/jsx-no-useless-fragment": [2, { "allowExpressions": true }],
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist",
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "types": ["node"],
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "allowJs": true,
+    "incremental": true,
+    "paths": {
+      "_pages/*": ["src/components/pages/*"],
+      "_components/*": ["src/components/*"],
+      "_icons": ["src/icons/index"],
+      "_icons/*": ["src/icons/*"],
+      "_svgs/*": ["src/svgs/*"],
+      "_styles/*": ["src/styles/*"],
+      "_constants/*": ["src/utils/constants/*"],
+      "_utils/*": ["src/utils/*"],
+      "_images/*": ["public/images/*"],
+      "react": ["node_modules/@types/react"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

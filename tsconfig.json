@@ -22,12 +22,10 @@
     "paths": {
       "_pages/*": ["src/components/pages/*"],
       "_components/*": ["src/components/*"],
-      "_icons": ["src/icons/index"],
-      "_icons/*": ["src/icons/*"],
-      "_svgs/*": ["src/svgs/*"],
       "_styles/*": ["src/styles/*"],
       "_constants/*": ["src/utils/constants/*"],
       "_utils/*": ["src/utils/*"],
+      "_svgs/*": ["src/svgs/*"],
       "_images/*": ["public/images/*"],
       "react": ["node_modules/@types/react"]
     }

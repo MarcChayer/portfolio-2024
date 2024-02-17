@@ -1,7 +1,7 @@
 {
   "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-rational-order-fix"
+    "stylelint-config-rational-order",
+    "stylelint-config-prettier"
   ],
   "rules": {
     "at-rule-no-unknown": [
@@ -12,8 +12,7 @@
           "apply",
           "variants",
           "responsive",
-          "screen",
-          "svg-load"
+          "screen"
         ]
       }
     ],
@@ -42,7 +41,7 @@
     "function-no-unknown": [
       true,
       {
-        "ignoreFunctions": ["theme", "svg-load", "svg-inline"]
+        "ignoreFunctions": ["theme"]
       }
     ],
     "custom-property-pattern": null,

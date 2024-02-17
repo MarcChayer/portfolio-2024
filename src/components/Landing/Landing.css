@@ -1,0 +1,59 @@
+.Landing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 64px);
+
+  @screen md {
+    position: relative;
+  }
+
+  &-titleContent {
+    text-align: center;
+    @screen md {
+      position: absolute;
+      top: 45%;
+      left: 45%;
+      text-align: left;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &-title {
+    font-weight: 700;
+    font-size: 34px;
+
+    @screen xs {
+      font-size: 54px;
+      white-space: nowrap;
+    }
+
+    @screen md {
+      font-size: 100px;
+    }
+  }
+
+  &-subtitle {
+    font-weight: 300;
+    font-size: 16px;
+
+    @screen xs {
+      font-size: 25px;
+    }
+
+    @screen md {
+      font-size: 30px;
+      line-height: 0px;
+    }
+  }
+
+  &-imageContainer {
+    @screen md {
+      position: absolute;
+      top: 45%;
+      left: 65%;
+      z-index: -2;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

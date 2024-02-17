@@ -1,20 +1,125 @@
-import type { Config } from 'tailwindcss';
+/** @type {import('tailwindcss').Config} */
 
-const config: Config = {
+import { fontFamily } from 'tailwindcss/defaultTheme';
+module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['var(--font-montserrat)', ...fontFamily.sans],
+    },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      screens: {
+        '2xs': { max: '360px' },
+        '3xl': '1920px',
       },
     },
+    colors: {
+      primary: {
+        dark: '#0D1520',
+        DEFAULT: '#1A2333',
+      },
+      secondary: {
+        DEFAULT: '#FFA057',
+      },
+      background: {
+        DEFAULT: '#0D1520',
+      },
+      white: '#FFFFFF',
+      black: '#000000',
+      grey: {
+        light: '#B5B5B5',
+        dark: '#333333',
+      },
+      current: 'currentColor',
+    },
+    dropShadow: {
+      '3xl': '0 4px 4px rgba(255, 160, 87, 1)',
+    },
+    screens: {
+      xs: '440px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px',
+    },
+
+    fontSize: {
+      // 950: ['rem(36px)', { lineHeight: 'rem(36px)' }],
+      // 900: ['rem(28px)', { lineHeight: 'rem(30px)' }],
+      // 800: ['rem(24px)', { lineHeight: 'rem(30px)' }],
+      // 700: ['rem(20px)', { lineHeight: 'rem(23px)' }],
+      // 600: ['rem(15px)', { lineHeight: 'rem(19px)' }],
+      // 500: ['rem(14px)', { lineHeight: 'rem(18px)' }],
+      // 450: ['rem(13px)', { lineHeight: 'rem(18px)' }],
+      // 400: ['rem(12px)', { lineHeight: 'rem(18px)' }],
+      // 300: ['rem(11px)', { lineHeight: 'rem(16px)' }],
+      // 200: ['rem(9px)', { lineHeight: 'rem(16px)' }],
+      950: ['36px', { lineHeight: '36px' }],
+      900: ['28px', { lineHeight: '30px' }],
+      800: ['24px', { lineHeight: '30px' }],
+      700: ['20px', { lineHeight: '23px' }],
+      600: ['15px', { lineHeight: '19px' }],
+      500: ['14px', { lineHeight: '18px' }],
+      450: ['13px', { lineHeight: '18px' }],
+      400: ['12px', { lineHeight: '18px' }],
+      300: ['11px', { lineHeight: '16px' }],
+      200: ['9px', { lineHeight: '16px' }],
+    },
+    container: { center: true },
   },
   plugins: [],
+  corePlugins: {
+    alignSelf: true,
+    borderWidth: true,
+    borderColor: true,
+    borderRadius: true,
+    boxShadow: true,
+    cursor: true,
+    flex: true,
+    maxWidth: true,
+    minWidth: true,
+    minHeight: true,
+    maxHeight: true,
+    opacity: true,
+    zIndex: true,
+    grid: true,
+  },
+  codePlugins: [
+    'preflight',
+    'container',
+    'accessibility',
+    'margin',
+    'padding',
+    'display',
+    'flexDirection',
+    'flexGrow',
+    'justifyContent',
+    'alignItems',
+    'inset',
+    'width',
+    'height',
+    'space',
+    'fontSize',
+    'fontWeight',
+    'gridTemplateColumns',
+    'gridColumn',
+    'gridColumnStart',
+    'gridColumnEnd',
+    'gap',
+    'fill',
+    'textColor',
+    'textAlign',
+    'backgroundColor',
+    'order',
+    'flexShrink',
+    'textOverflow',
+    'textTransform',
+    'flexWrap',
+    'position',
+  ],
 };
-export default config;

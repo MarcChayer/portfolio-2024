@@ -1,0 +1,18 @@
+.Container {
+  width: 80%;
+
+  @screen lg {
+    width: 70%;
+  }
+
+  &-title {
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+
+    @screen xs {
+      font-weight: 700;
+      font-size: 36px;
+    }
+  }
+}

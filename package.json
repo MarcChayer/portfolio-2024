@@ -5,28 +5,41 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "yarn build && next dev -p 3000",
     "lint": "next lint"
   },
   "dependencies": {
+    "framer-motion": "11.0.x",
+    "next": "14.1.x",
     "react": "18.2.x",
-    "react-dom": "18.2.x",
-    "next": "14.1.x"
+    "react-dom": "18.2.x"
   },
   "devDependencies": {
-    "typescript": "5.2.x",
-    "typescript-plugin-css-modules": "5.0.x",
     "@types/node": "20.9.x",
     "@types/react": "18.2.x",
     "@types/react-dom": "18.2.x",
-    "autoprefixer": "^10.0.1",
-    "postcss": "8.4.x",
-    "postcss-loader": "7.3.x",
-    "tailwindcss": "3.3.x",
+    "autoprefixer": "10.4.x",
     "eslint": "8.51.x",
+    "eslint-config-airbnb-typescript": "12.3.x",
     "eslint-config-next": "14.0.x",
+    "eslint-config-prettier": "8.3.x",
+    "eslint-formatter-pretty": "4.1.x",
+    "eslint-plugin-import": "2.23.x",
+    "eslint-plugin-react": "7.24.x",
+    "eslint-plugin-react-hooks": "4.2.x",
+    "postcss": "8.4.x",
+    "postcss-import": "16.0.x",
+    "postcss-loader": "7.3.x",
+    "postcss-nested-ancestors": "3.0.x",
+    "postcss-rem": "3.0.x",
     "prettier": "3.0.x",
     "prettier-plugin-tailwindcss": "0.5.x",
-    "stylelint": "15.10.x"
+    "stylelint": "15.10.x",
+    "stylelint-config-prettier": "8.0.x",
+    "stylelint-config-rational-order": "0.1.x",
+    "stylelint-config-standard": "21.0.x",
+    "tailwindcss": "3.4.x",
+    "typescript": "5.2.x",
+    "typescript-plugin-css-modules": "5.0.x"
   }
 }

@@ -1,40 +1,137 @@
-import React from 'react';
-import type { ProjectsProps } from './Projects.types';
+import React, { useState } from 'react';
 import Container from '_components/common/Container';
+import Lign from './components/Lign';
+import Modal from './components/Modal';
+import { projects } from 'src/__fixtures__/projects';
+import { AnimatePresence, motion } from 'framer-motion';
+import display1 from '_svgs/display1.svg';
+import display2 from '_svgs/display2.svg';
+import Image from 'next/image';
+import Card from './components/Card';
+import Button from '_components/common/Button';
 
-const Projects = ({}: ProjectsProps) => {
+const Projects = () => {
+  const [modal, setModal] = useState({ active: false, index: 0 });
+  const [displayMode, setDisplayMode] = useState<'lign' | 'card'>('lign');
+  const [activeFilter, setActiveFilter] = useState('all'); // Filtre actif
+
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(filter);
+  };
+
+  const filteredProjects = projects.filter((project) => {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'dev') return project.tag.includes('web');
+    if (activeFilter === 'design') return project.tag.includes('design');
+    return false;
+  });
+
   return (
-    <Container className="Projects" title="Mes projets" id="projets">
-      <div className="relative">
-        <div className="flex flex-col lg:flex-row-reverse lg:items-center">
-          <div className="bg-grey-light rounded-b-none rounded-t-lg lg:rounded-lg h-[250px] sm:h-[350px] sm:w-[450px] lg:h-[500px] lg:w-[500px]" />
-          <div className="flex flex-col justify-center gap-4 py-4 px-6 sm:py-8 sm:px-10 sm:h-[350px] sm:w-[450px] lg:h-[500px] lg:py-0">
-            <div className="flex items-center justify-between">
-              <span className="text-800 italic">01.</span>
-              <div className="flex items-center gap-4 font-bold italic">
-                <span className="border-white border-[1px] rounded-2xl text-400 px-4">
-                  Web
-                </span>
-                <span className="border-white border-[1px] rounded-2xl text-400 px-4">
-                  Design
-                </span>
-              </div>
-            </div>
-            <h3 className="text-900 sm:text-950 font-extrabold text-secondary">
-              Title Project
-            </h3>
-            <p className="text-600 xs:text-600 md:text-700 font-medium">
-              Techno
-            </p>
-            <p className="font-thin">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-              dolorem officia beatae accusamus optio quos exercitationem
-              doloremque deserunt sint ad sit amet consequuntur ratione laborum
-              aut, iure deleniti repudiandae odio?
-            </p>
+    <Container id="projets" className="">
+      <div className="flex flex-col h-full w-full justify-center">
+        <div className="flex justify-between w-full pb-12 md:pb-24">
+          <div className="flex flex-col w-full flex-wrap gap-4 xs:flex-row xs:w-auto md:gap-6">
+            <Button
+              onClick={() => handleFilterChange('all')}
+              title="Tous les projets"
+              isActive={activeFilter === 'all'}
+            >
+              Tous
+            </Button>
+            <Button
+              onClick={() => handleFilterChange('dev')}
+              title="Projets développements"
+              isActive={activeFilter === 'dev'}
+            >
+              Développement
+            </Button>
+            <Button
+              onClick={() => handleFilterChange('design')}
+              title="Projets graphisme"
+              isActive={activeFilter === 'design'}
+            >
+              Design
+            </Button>
+          </div>
+          <div className="hidden md:flex md:gap-6">
+            <Button
+              onClick={() => setDisplayMode('lign')}
+              title="Affichage 1"
+              isActive={displayMode === 'lign'}
+            >
+              <Image src={display1} alt="Affichage 1" width={15} />
+            </Button>
+            <Button
+              onClick={() => setDisplayMode('card')}
+              title="Affichage 2"
+              isActive={displayMode === 'card'}
+            >
+              <Image src={display2} alt="Affichage 2" width={15} />
+            </Button>
           </div>
         </div>
-        <div className="h-4/5 w-full bg-primary rounded-lg absolute -z-10 bottom-0 sm:h-[400px] md:h-[500px] lg:-bottom-12 lg:h-[600px] lg:w-3/4 lg:left-0" />
+
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            className={`${
+              displayMode === 'card'
+                ? 'grid grid-cols-1 gap-24 md:grid-cols-2 h-full'
+                : 'flex flex-col justify-center'
+            }`}
+            key={activeFilter}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{
+              duration: 0.3,
+              ease: 'easeInOut',
+            }}
+          >
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{
+                  opacity: 0,
+                  y: -20,
+                  transition: {
+                    duration: 0.3,
+                    ease: 'easeInOut',
+                  },
+                }}
+                transition={{
+                  delay: index * 0.2,
+                  duration: 0.3,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="block md:hidden">
+                  <Card key={project.id} project={project} />
+                </div>
+
+                <div className="hidden md:block">
+                  {displayMode === 'lign' ? (
+                    <Lign
+                      key={project.id}
+                      id={project.id}
+                      index={index}
+                      title={project.fullName}
+                      technos={project.technos}
+                      year={project.year}
+                      setModal={setModal}
+                    />
+                  ) : (
+                    <Card key={project.id} project={project} />
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+        {displayMode === 'lign' && (
+          <Modal modal={modal} projects={filteredProjects} />
+        )}
       </div>
     </Container>
   );

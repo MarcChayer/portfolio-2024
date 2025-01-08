@@ -1,0 +1,37 @@
+.Lign {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 25px 50px 25px 50px;
+  border-top: 1px solid #89afc5;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:last-of-type {
+    border-bottom: 1px solid #89afc5;
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:hover h2 {
+    transform: translateX(-10px);
+  }
+
+  &:hover p {
+    transform: translateX(10px);
+  }
+
+  & h2 {
+    margin: 0px;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    transition: all 0.4s;
+  }
+
+  & p {
+    font-weight: 300;
+    transition: all 0.4s;
+  }
+}

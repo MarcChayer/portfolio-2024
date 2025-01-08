@@ -1,13 +1,36 @@
-import type { ReactNode } from 'react';
-import NavBar from './NavBar';
-import Footer from './Footer';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import StickyCursor from '_components/common/StickyCursor';
+import NavBar from '_components/common/NavBar';
+import Footer from '_components/common/Footer';
+import useSmoothScroll from 'src/hooks/useSmoothScroll';
 
-export default function Layout({ children }: { children: ReactNode }) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
+  const [key, setKey] = useState(0);
+
+  const { scrollTo } = useSmoothScroll();
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setKey((prevKey) => prevKey + 1);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <>
-      <NavBar />
+      <StickyCursor key={key} />
+      <NavBar scrollTo={scrollTo} />
       <main>{children}</main>
       <Footer />
     </>
   );
-}
+};
+
+export default Layout;

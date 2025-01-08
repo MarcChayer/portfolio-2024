@@ -23,7 +23,9 @@ module.exports = {
         DEFAULT: '#1A2333',
       },
       secondary: {
-        DEFAULT: '#FFA057',
+        DEFAULT: '#89AFC5',
+        dark: '#5A869E',
+        neon: '#00FFFF',
       },
       background: {
         DEFAULT: '#0D1520',
@@ -49,16 +51,6 @@ module.exports = {
     },
 
     fontSize: {
-      // 950: ['rem(36px)', { lineHeight: 'rem(36px)' }],
-      // 900: ['rem(28px)', { lineHeight: 'rem(30px)' }],
-      // 800: ['rem(24px)', { lineHeight: 'rem(30px)' }],
-      // 700: ['rem(20px)', { lineHeight: 'rem(23px)' }],
-      // 600: ['rem(15px)', { lineHeight: 'rem(19px)' }],
-      // 500: ['rem(14px)', { lineHeight: 'rem(18px)' }],
-      // 450: ['rem(13px)', { lineHeight: 'rem(18px)' }],
-      // 400: ['rem(12px)', { lineHeight: 'rem(18px)' }],
-      // 300: ['rem(11px)', { lineHeight: 'rem(16px)' }],
-      // 200: ['rem(9px)', { lineHeight: 'rem(16px)' }],
       950: ['36px', { lineHeight: '36px' }],
       900: ['28px', { lineHeight: '30px' }],
       800: ['24px', { lineHeight: '30px' }],

@@ -1,0 +1,31 @@
+.modal {
+  pointer-events: auto;
+
+  &-modalContainer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 280px;
+    overflow: hidden;
+    background-color: white;
+    pointer-events: none;
+  }
+
+  &-modalSlider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: top 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  &-modalContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}

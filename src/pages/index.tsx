@@ -1,18 +1,17 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Layout from '_components/layout';
-import type { NextPageWithLayout } from './_app';
 import Landing from '_components/Landing';
-import Skills from '_components/Skills';
 import Projects from '_components/Projects';
 import About from '_components/About';
+import Skills from '_components/Skills';
 
-const Page: NextPageWithLayout = () => {
+const Page = () => {
   return (
-    <div className="flex flex-col items-center gap-96">
+    <div className="flex flex-col items-center">
       <Landing />
+      <About />
       <Skills />
       <Projects />
-      <About />
     </div>
   );
 };

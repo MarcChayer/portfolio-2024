@@ -7,6 +7,7 @@
 }
 
 body {
+  overflow: auto !important;
   font-family: theme('fontFamily.sans');
   background: theme('colors.background.DEFAULT');
   -webkit-font-smoothing: antialiased;

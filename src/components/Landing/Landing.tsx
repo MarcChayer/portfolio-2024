@@ -6,17 +6,17 @@ import AnimatedText from '_components/common/AnimatedText';
 
 const Landing = () => {
   return (
-    <Container className="relative lg:!w-2/3 lg:translate-x-[7%]">
+    <Container className="md:relative">
       <motion.div
         initial={{ x: '20%', opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 1, ease: 'easeInOut' }}
-        className="relative w-full lg:w-auto lg:h-[640px]"
+        className="w-full md:w-auto"
       >
-        <LogoNeon />
+        <LogoNeon className="z-10 w-full md:translate-x-[20%] md:h-[min(50vh,750px)]" />
       </motion.div>
 
-      <div className="lg:absolute w-full lg:translate-x-[7%] lg:translate-y-[40%] text-center lg:text-left">
+      <div className="z-10 text-center md:absolute md:translate-x-[-20%] md:translate-y-[40%] md:text-left">
         <motion.div
           initial={{ x: '-20%', opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -25,7 +25,7 @@ const Landing = () => {
           <AnimatedText
             el="h1"
             text="Marc Chayer"
-            className="font-bold leading-none text-[min(10vw,100px)] w-full whitespace-nowrap"
+            className="font-bold leading-none text-[min(10vw,60px)] sm:text-[min(10vw,65px)] md:text-[min(10vw,70px)] lg:text-[min(10vw,80px)] xl:text-[min(10vw,90px)] whitespace-nowrap"
             once
           />
         </motion.div>
@@ -38,7 +38,7 @@ const Landing = () => {
           <AnimatedText
             el="p"
             text={['Développeur React.js - Next.js']}
-            className="font-light text-[min(auto)] w-full xs:text-[min(4vw,32px)] md:max-w-[800px] md:ml-1.5"
+            className="font-light text-[min(4vw,20px)] md:text-[min(4vw,22px)] lg:text-[min(4vw,25px)] xl:text-[min(4vw,28px)] md:max-w-[800px] md:ml-1.5"
             once
             animation={{
               hidden: {

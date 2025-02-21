@@ -24,19 +24,25 @@ const createTextAnimation = (text: string) => {
 const Lign = ({ id, index, title, technos, year, setModal }: LignProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleMouseEnter = () => {
+    if (id && index !== undefined) {
+      setModal({ active: true, index });
+      setIsHovered(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setModal({ active: false, index });
+    setIsHovered(false);
+  };
+
   return (
-    <Link href={`/projet/${id}`}>
-      <div
-        onMouseEnter={() => {
-          setIsHovered(true);
-          setModal({ active: true, index });
-        }}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          setModal({ active: false, index });
-        }}
-        className="Lign"
-      >
+    <Link
+      href={`/projet/${id}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="Lign">
         <h2 className="font-bold uppercase">{title}</h2>
         <p key={isHovered ? 'technos' : 'year'}>
           {createTextAnimation(isHovered ? year : technos)}

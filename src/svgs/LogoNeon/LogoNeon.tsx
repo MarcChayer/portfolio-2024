@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const LogoNeon = () => {
+const LogoNeon = ({ className }: { className?: string }) => {
   const pathStyle = {
     fill: 'none',
     stroke: '#89AFC5',
@@ -27,6 +27,7 @@ const LogoNeon = () => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 695 561"
       height="100%"
+      className={className}
     >
       <motion.path
         d="M245.2,330.1l-18.3-37.2L226,291l-0.9,1.8L102.2,542H23.6L226,131.3l58.9,118.9L245.2,330.1z"

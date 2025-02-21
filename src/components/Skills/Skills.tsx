@@ -73,7 +73,7 @@ const Skills = () => {
                 }}
                 whileHover={{
                   scale: 1.1,
-                  x: [0, -3, 3, -2, 2, 0],
+                  // x: [0, -3, 3, -2, 2, 0],
                   transition: {
                     duration: 0.2,
                   },
@@ -113,14 +113,14 @@ const Skills = () => {
 
       <div className="max-w-lg 2xs:max-w-md">
         <h2 className="2xs:text-800 text-950 font-bold">
-          Ma Stack <span className="text-secondary">Technique</span>
+          Ma stack <span className="text-secondary">technique</span>
         </h2>
-        <p className="mt-8">
+        <p className="mt-8 text-700 leading-7">
           je conçois et développe des applications web dynamiques et
           performantes avec React.js et Next.js, en exploitant TypeScript pour
           assurer un code robuste et maintenable.
         </p>
-        <ul className="mt-4 pl-5 list-disc">
+        <ul className="mt-4 pl-5 list-disc text-700 leading-7">
           <li>Création de design systems avec Storybook</li>
           <li>Stylisation moderne avec Tailwind CSS</li>
           <li>Consommation d’API REST</li>

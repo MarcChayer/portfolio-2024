@@ -4,32 +4,31 @@ import Image from 'next/image';
 
 const About = () => {
   return (
-    <Container id="a-propos">
-      <div className="flex items-center justify-center gap-8" id="a-propos">
-        <div className="flex flex-col gap-4 w-1/3">
-          <p>King of the north</p>
-          <p>Hell Yeah</p>
-          {/* <p>
-            Dessinant depuis petit, je me suis naturellement orienté vers des
-            études de graphisme mêlant design et communication visuelle.
-          </p>
-          <p>
-            Après plusieurs années en tant que graphiste, je me suis lancé le
-            défi de devenir développeur, afin de pouvoir lier ces deux
-            disciplines.
-          </p>
-          <p>
-            J’ai une affinitée particulière pour les animations et le fait
-            d’offrir la meilleure expérience utilisateur possible.
-          </p> */}
-        </div>
-        <Image
-          src="/images/marcProfileV2.png"
-          alt="Marc Chayer"
-          width={400}
-          height={0}
-        />
+    <Container className="gap-20 xl:flex-row" id="a-propos">
+      <div className="max-w-lg 2xs:max-w-md">
+        <h2 className="2xs:text-800 text-950 font-bold">
+          Un petit tour sur <span className="text-secondary">mon parcours</span>
+        </h2>
+        <p className="mt-8 text-700 leading-7">
+          Développeur front-end avec 10 ans d'expérience en design graphique.
+          Diplômé en communication visuelle, cela fait maintenant quatre ans que
+          j'ai évolué vers le développement web.
+        </p>
+        <p className="mt-4 text-700 leading-7">
+          Mon parcours de designer me permet d'apporter une sensibilité
+          particulière à l'UX et aux détails visuels dans chaque projet.
+        </p>
+        <p className="mt-4 text-700 leading-7">
+          Mon objectif : créer des expériences web uniques, réactives et
+          sécurisés.
+        </p>
       </div>
+      <Image
+        src="/images/marcProfileV2.png"
+        alt="Marc Chayer"
+        width={400}
+        height={0}
+      />
     </Container>
   );
 };

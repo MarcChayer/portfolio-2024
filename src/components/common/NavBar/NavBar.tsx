@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import logoMC from '_svgs/logo-MC.svg';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+  type Variants,
+} from 'framer-motion';
 import { useRouter } from 'next/router';
 
 const navItemVariants = {
@@ -15,7 +21,7 @@ const navItemVariants = {
     transition: {
       delay: i * 0.1,
       duration: 0.3,
-      ease: 'easeOut',
+      ease: 'easeInOut',
     },
   }),
   exit: {
@@ -69,6 +75,9 @@ const NavLinks = ({
 
 const DesktopNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
   const router = useRouter();
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
+  const lastYRef = useRef(0);
 
   const handleNavigation = (selector: string) => {
     const url = router.pathname.includes('projet/');
@@ -79,8 +88,28 @@ const DesktopNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
     }
   };
 
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const difference = y - lastYRef.current;
+    if (Math.abs(difference) > 100) {
+      setHidden(difference > 0);
+      lastYRef.current = y;
+    }
+  });
+
+  const navVariants: Variants = {
+    visible: { y: '0%' },
+    hidden: { y: '-90%' },
+  };
+
   return (
-    <nav className="hidden sm:flex items-center justify-between p-6">
+    <motion.nav
+      className="hidden sm:flex items-center justify-between p-6 bg-primary-dark backdrop-blur-md bg-opacity-20"
+      onHoverStart={() => setHidden(false)}
+      animate={hidden ? 'hidden' : 'visible'}
+      initial="visible"
+      variants={navVariants}
+      transition={{ duration: 0.3 }}
+    >
       <a href="/">
         <Image src={logoMC} alt="Logo du site" priority height={40} />
       </a>
@@ -89,7 +118,7 @@ const DesktopNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
         className="flex flex-row gap-10"
         animate={true}
       />
-    </nav>
+    </motion.nav>
   );
 };
 
@@ -129,7 +158,7 @@ const MobileNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
 
   return (
     <motion.nav
-      className="sm:hidden flex flex-col"
+      className="sm:hidden flex flex-col bg-primary-dark backdrop-blur-md bg-opacity-20"
       initial={false}
       animate={{ height: menuOpen ? '100vh' : 'auto' }}
       onTouchStart={handleTouchStart}
@@ -141,45 +170,41 @@ const MobileNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
           <Image src={logoMC} alt="Logo du site" priority height={40} />
         </a>
         <motion.button
-          className="p-4"
           onClick={() => setMenuOpen(!menuOpen)}
-          animate={{ rotate: menuOpen ? 180 : 0 }}
+          animate={{ rotate: menuOpen ? 360 : 0 }}
+          className="p-4"
         >
-          {menuOpen ? '✕' : '☰'}
+          {menuOpen ? 'Fermer' : 'Menu'}
         </motion.button>
       </div>
 
-      <AnimatePresence mode="wait">
-        {menuOpen && (
-          <motion.div
-            className="flex-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <NavLinks
-              onItemClick={handleNavigation}
-              className="flex flex-col items-center justify-center h-full gap-6"
-              itemClassName="text-800 font-bold"
-              animate={true}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {menuOpen && (
+        <motion.div
+          className="flex-1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <NavLinks
+            onItemClick={handleNavigation}
+            className="flex flex-col items-center justify-center h-full gap-6"
+            itemClassName="text-800 font-bold"
+            animate={true}
+          />
+        </motion.div>
+      )}
     </motion.nav>
   );
 };
 
 const NavBar = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
   return (
-    <header
-      className={`fixed top-0 z-20 w-full bg-primary-dark backdrop-blur-sm bg-opacity-40`}
-    >
-      <AnimatePresence mode="wait">
+    <header className={`fixed top-0 z-20 w-full`}>
+      <AnimatePresence>
         <DesktopNav scrollTo={scrollTo} />
+        <MobileNav scrollTo={scrollTo} />
       </AnimatePresence>
-      <MobileNav scrollTo={scrollTo} />
     </header>
   );
 };

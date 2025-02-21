@@ -93,7 +93,7 @@ export const projects: ProjectsType[] = [
     fullName: 'ASAV',
     technos: 'Adobe Illustrator - Adobe Photoshop',
     description:
-      "Développement complet de l'identité visuelle pour une entreprise spécialisée en installations thermiques et climatisation. Création d'un logo distinctif sous Illustrator, reflétant le professionnalisme et l'expertise technique de l'entreprise. Le design s'articule autour d'une approche moderne tout en conservant une lisibilité optimale sur tous les supports de communication.",
+      "Mise en de l'identité visuelle pour une entreprise spécialisée en installations thermiques et climatisation. Création d'un logo distinctif sous Illustrator, reflétant le professionnalisme et l'expertise technique de l'entreprise. Le design s'articule autour d'une approche moderne tout en conservant une lisibilité optimale sur tous les supports de communication.",
     tag: ['design'],
     images: {
       first: asav1,
@@ -154,7 +154,7 @@ export const projects: ProjectsType[] = [
     fullName: 'SCM SERVICE',
     technos: 'Adobe Illustrator',
     description:
-      "Développement de l'identité visuelle pour une entreprise de soudure et chaudronnerie. Design illustré, adapté au secteur de la métallerie, avec une attention particulière portée à la lisibilité et à l'impact visuel.",
+      "Conception de l'identité visuelle pour une entreprise de soudure et chaudronnerie. Design illustré, adapté au secteur de la métallerie, avec une attention particulière portée à la lisibilité et à l'impact visuel.",
     tag: ['design'],
     images: {
       first: scm1,

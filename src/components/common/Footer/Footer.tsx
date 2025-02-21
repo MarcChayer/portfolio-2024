@@ -19,13 +19,18 @@ const Footer = () => {
         </Link>
 
         <Link
-          href="https://github.com/MarcChayer?tab=repositories"
+          href="https://github.com/MarcChayer"
           target="_blank"
           rel="noopener"
         >
           GitHub
         </Link>
-        <Link href="" download="cv marc chayer" target="_blank" rel="noopener">
+        <Link
+          href={'/CV-MarcChayer.pdf'}
+          download="CV Marc Chayer"
+          target="_blank"
+          rel="noopener"
+        >
           CV
         </Link>
       </div>

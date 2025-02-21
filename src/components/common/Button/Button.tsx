@@ -13,8 +13,8 @@ const Button = ({
     type={type}
     className={`${className} 
       ${isActive ? 'text-primary border-secondary bg-secondary' : ''} 
-      font-medium px-3 py-2 border border-secondary border-solid rounded-full transition-colors md:px-4 md:py-3 
-      hover:border-secondary hover:bg-secondary active:border-secondary-dark active:bg-secondary-dark `}
+      font-medium px-3 py-2 border border-secondary border-solid rounded-full transition duration-300 md:px-4 md:py-3 
+      hover:border-secondary hover:bg-secondary hover:text-primary active:border-secondary-dark active:bg-secondary-dark `}
     onClick={onClick}
     title={title}
   >

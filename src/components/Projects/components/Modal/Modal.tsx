@@ -61,33 +61,31 @@ const Modal = ({ modal, projects }: ModalProps) => {
   }, []);
 
   return (
-    <>
-      <motion.div
-        ref={modalContainer}
-        variants={scaleAnimation}
-        initial="initial"
-        animate={active ? 'enter' : 'closed'}
-        className="modal-modalContainer"
-      >
-        <div style={{ top: index * -100 + '%' }} className="modal-modalSlider">
-          {projects.map((project) => {
-            const {
-              images: { first },
-            } = project;
-            return (
-              <div className="modal-modalContent" key={`modal_${project.id}`}>
-                <Image
-                  src={first}
-                  height={400}
-                  alt={`Projet ${project.fullName}`}
-                  priority
-                />
-              </div>
-            );
-          })}
-        </div>
-      </motion.div>
-    </>
+    <motion.div
+      ref={modalContainer}
+      variants={scaleAnimation}
+      initial="initial"
+      animate={active ? 'enter' : 'closed'}
+      className="modal-modalContainer"
+    >
+      <div style={{ top: index * -100 + '%' }} className="modal-modalSlider">
+        {projects.map((project, i) => {
+          const {
+            images: { first },
+          } = project;
+          return (
+            <div className="modal-modalContent" key={`modal_${project.id}`}>
+              <Image
+                src={first}
+                height={400}
+                alt={`Projet ${project.fullName}`}
+                priority
+              />
+            </div>
+          );
+        })}
+      </div>
+    </motion.div>
   );
 };
 

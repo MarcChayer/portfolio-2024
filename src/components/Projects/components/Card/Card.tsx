@@ -25,7 +25,7 @@ const Card = ({ project }: CardProps) => (
 
       <p className="text-600 italic pt-4 pb-4">{project.technos}</p>
 
-      <p className="text-600">{project.description}</p>
+      <p className="text-700 leading-7">{project.description}</p>
     </div>
   </Link>
 );

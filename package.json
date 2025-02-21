@@ -14,7 +14,8 @@
     "gsap": "^3.12.5",
     "next": "14.1.x",
     "react": "18.2.x",
-    "react-dom": "18.2.x"
+    "react-dom": "18.2.x",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/node": "20.9.x",

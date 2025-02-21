@@ -1,54 +1,77 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { projects } from 'src/__fixtures__/projects';
-import ArrowDown from '_svgs/ArrowDown';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import ButtonsAction from './components/ButtonsAction';
 import Container from '_components/common/Container';
 import ProjectImages from './components/ProjectImages';
 import useSmoothScroll from 'src/hooks/useSmoothScroll';
+import ArrowDown from '_svgs/arrowDown.svg';
 import type { ProjectProps } from './Project.types';
 
 const Project = ({ project }: ProjectProps) => {
   const router = useRouter();
   const projectIndex = projects.findIndex((p) => p.id === project.id);
-
   const { scrollTo } = useSmoothScroll();
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+
+  const imageScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.8]);
+  const imageY = useTransform(scrollYProgress, [0, 0.25], [0, -100]);
+
+  const arrowOpacity = useTransform(scrollYProgress, [0, 0.25], [0.5, 0]);
+
   const handleScroll = () => {
-    const target = document.getElementById('projectContent');
-    if (target && scrollTo) {
-      scrollTo('#projectContent');
-    }
+    scrollTo?.('#projectContent');
   };
 
   return (
     <div className="Project">
-      <div className="relative flex flex-col items-center">
-        <Image
-          className="h-96 md:h-screen w-full object-cover"
-          src={project.images.first}
-          alt={`Image du projet ${project.fullName}`}
-        />
+      <div ref={ref} className="relative flex flex-col items-center">
         <motion.div
-          className="absolute bottom-8 opacity-30 cursor-pointer"
-          animate={{
-            y: ['0px', '10px', '0px'],
+          style={{
+            scale: imageScale,
+            y: imageY,
+            width: '100%',
           }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            repeatType: 'loop',
-            ease: 'easeInOut',
-          }}
-          onClick={handleScroll}
+          className="h-96 md:h-screen"
         >
-          <ArrowDown />
+          <Image
+            className="object-cover w-full h-full"
+            src={project.images.first}
+            alt={`Image du projet ${project.fullName}`}
+          />
+          <motion.button
+            className="absolute inset-x-0 bottom-8 flex justify-center items-center"
+            type="button"
+            style={{
+              opacity: arrowOpacity,
+            }}
+            animate={{ y: ['0px', '10px', '0px'] }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              repeatType: 'loop',
+              ease: 'easeInOut',
+            }}
+            onClick={handleScroll}
+          >
+            <Image
+              src={ArrowDown}
+              alt="Flèche animée indiquant de faire défiler la page vers le bas"
+              width={30}
+            />
+          </motion.button>
         </motion.div>
       </div>
 
-      <Container className="mx-auto" id="projectContent">
+      <Container className="mx-auto !pt-8" id="projectContent">
         <div className="grid grid-cols-1 md:grid-cols-[2fr,4fr] gap-8 md:gap-36 w-full">
           <div>
             <p className="tracking-wide text-700 text-secondary mb-4 md:mb-10">
@@ -63,7 +86,7 @@ const Project = ({ project }: ProjectProps) => {
             <p className="tracking-wide text-700 text-secondary mb-4 md:mb-10">
               Présentation
             </p>
-            <p className="text-700 font-medium leading-normal">
+            <p className="text-700 font-medium leading-7">
               {project.description}
             </p>
           </div>

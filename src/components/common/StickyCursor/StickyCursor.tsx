@@ -89,7 +89,7 @@ const StickyCursor = () => {
         damping: 12,
         stiffness: 200,
       }}
-      className="fixed rounded-full pointer-events-none z-20"
+      className="fixed rounded-full pointer-events-none z-50"
     />
   ) : null;
 };

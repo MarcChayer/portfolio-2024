@@ -1,18 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import type { AnimatedTextProps } from './AnimatedText.types';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useAnimation, useInView, motion } from 'framer-motion';
+import type { AnimatedTextProps } from './AnimatedText.types';
 
 const defaultAnimations = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-  },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.1,
-    },
+    transition: { duration: 0.3, ease: 'easeOut' },
   },
 };
 
@@ -20,35 +15,25 @@ const AnimatedText = ({
   text,
   el: Wrapper = 'p',
   className,
-  once,
-  repeatDelay,
+  once = false,
   animation = defaultAnimations,
 }: AnimatedTextProps) => {
   const controls = useAnimation();
   const textArray = Array.isArray(text) ? text : [text];
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.5, once });
+  const isInView = useInView(ref, { amount: 0.5 });
+
+  const show = useCallback(() => {
+    controls.start('visible');
+  }, [controls]);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    const show = () => {
-      controls.start('visible');
-      if (repeatDelay) {
-        timeout = setTimeout(async () => {
-          await controls.start('hidden');
-          controls.start('visible');
-        }, repeatDelay);
-      }
-    };
-
     if (isInView) {
       show();
-    } else {
+    } else if (!once) {
       controls.start('hidden');
     }
-
-    return () => clearTimeout(timeout);
-  }, [isInView]);
+  }, [isInView, show, once]);
 
   return (
     <Wrapper className={className}>
@@ -58,18 +43,18 @@ const AnimatedText = ({
         initial="hidden"
         animate={controls}
         variants={{
-          visible: { transition: { staggerChildren: 0.1 } },
+          visible: { transition: { staggerChildren: 0.05 } },
           hidden: {},
         }}
         aria-hidden
       >
         {textArray.map((line, lineIndex) => (
-          <span className="block" key={`${line}-${lineIndex}`}>
+          <span className="block" key={lineIndex}>
             {line.split(' ').map((word, wordIndex) => (
-              <span className="inline-block" key={`${word}-${wordIndex}`}>
+              <span className="inline-block" key={wordIndex}>
                 {word.split('').map((char, charIndex) => (
                   <motion.span
-                    key={`${char}-${charIndex}`}
+                    key={charIndex}
                     className="inline-block"
                     variants={animation}
                   >

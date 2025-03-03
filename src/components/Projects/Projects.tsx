@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Container from '_components/common/Container';
 import Lign from './components/Lign';
 import Modal from './components/Modal';
 import { projects } from 'src/__fixtures__/projects';
@@ -44,12 +43,11 @@ const Projects = () => {
     setActiveFilter(filter);
     setModal({ active: false, index: 0 });
   };
-
   return (
-    <Container id="projets" className="!justify-start">
-      <div className="flex flex-col h-full w-full">
-        <div className="self-start flex justify-between w-full pb-12 md:pb-24">
-          <div className="flex flex-col w-full flex-wrap gap-4 xs:flex-row xs:w-auto md:gap-6">
+    <>
+      <div className="flex flex-col w-full">
+        <div className="flex justify-between pb-24">
+          <div className="flex flex-col w-full flex-wrap gap-4 sm:flex-row sm:w-auto md:gap-6">
             <Button
               onClick={() => handleFilterChange('all')}
               title="Tous les projets"
@@ -72,14 +70,17 @@ const Projects = () => {
               Design
             </Button>
           </div>
-          <div className="hidden md:flex md:gap-6">
+          <div className="hidden md:flex sm:gap-6">
             <Button
               onClick={() => setDisplayMode('lign')}
               title="Afficher les projets en liste"
               isActive={displayMode === 'lign'}
+              className={`${
+                displayMode === 'lign' ? 'hover:!fill-primary' : ''
+              }`}
             >
               <DisplayLign
-                className={`w-4 h-4 fill-white transition duration-300 hover:fill-primary ${
+                className={`w-4 h-4 fill-white transition duration-300 group-hover:fill-primary ${
                   displayMode === 'lign' ? '!fill-primary' : ''
                 }`}
               />
@@ -90,7 +91,7 @@ const Projects = () => {
               isActive={displayMode === 'card'}
             >
               <DisplayGrid
-                className={`w-4 h-4 fill-white transition duration-300 hover:fill-primary ${
+                className={`w-4 h-4 fill-white transition duration-300 group-hover:fill-primary ${
                   displayMode === 'card' ? '!fill-primary' : ''
                 }`}
               />
@@ -100,9 +101,10 @@ const Projects = () => {
 
         <AnimatePresence mode="popLayout">
           <motion.div
+            key={displayMode}
             className={`${
               displayMode === 'card'
-                ? 'grid grid-cols-1 gap-24 md:grid-cols-2 h-full'
+                ? 'grid grid-cols-1 gap-24 md:grid-cols-2'
                 : 'flex flex-col justify-center'
             }`}
             initial={{ opacity: 0, scale: 0.95 }}
@@ -116,7 +118,7 @@ const Projects = () => {
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project, index) => (
                 <motion.div
-                  key={project.id}
+                  key={`motion-${project.id}-${displayMode}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{
@@ -134,13 +136,13 @@ const Projects = () => {
                   }}
                 >
                   <div className="block md:hidden">
-                    <Card key={project.id} project={project} />
+                    <Card key={`card-${project.id}`} project={project} />
                   </div>
 
                   <div className="hidden md:block">
                     {displayMode === 'lign' ? (
                       <Lign
-                        key={project.id}
+                        key={`lign-${project.id}`}
                         id={project.id}
                         index={index}
                         title={project.fullName}
@@ -149,23 +151,23 @@ const Projects = () => {
                         setModal={setModal}
                       />
                     ) : (
-                      <Card key={project.id} project={project} />
+                      <Card key={`card-${project.id}`} project={project} />
                     )}
                   </div>
                 </motion.div>
               ))
             ) : (
-              <p>Aucun projet ne correspond à ce filtre.</p> // Message si aucun projet ne correspond
+              <p>Aucun projet ne correspond à ce filtre.</p>
             )}
           </motion.div>
-
-          {/* Modal conditionnelle */}
+        </AnimatePresence>
+        <AnimatePresence>
           {displayMode === 'lign' && filteredProjects.length > 0 && (
             <Modal modal={modal} projects={filteredProjects} />
           )}
         </AnimatePresence>
       </div>
-    </Container>
+    </>
   );
 };
 

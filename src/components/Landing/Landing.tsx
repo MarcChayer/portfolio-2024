@@ -1,19 +1,19 @@
 import React from 'react';
-import Container from '_components/common/Container';
 import { motion } from 'framer-motion';
 import LogoNeon from '_svgs/LogoNeon';
 import AnimatedText from '_components/common/AnimatedText';
 
 const Landing = () => {
   return (
-    <Container className="md:relative">
+    <>
       <motion.div
         initial={{ x: '20%', opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 1, ease: 'easeInOut' }}
+        viewport={{ once: true }}
         className="w-full md:w-auto"
       >
-        <LogoNeon className="z-10 w-full md:translate-x-[20%] md:h-[min(50vh,750px)]" />
+        <LogoNeon className="z-10 md:translate-x-[20%] md:h-[min(40vw,750px)]" />
       </motion.div>
 
       <div className="z-10 text-center md:absolute md:translate-x-[-20%] md:translate-y-[40%] md:text-left">
@@ -21,6 +21,7 @@ const Landing = () => {
           initial={{ x: '-20%', opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeInOut', delay: 0.25 }}
+          viewport={{ once: true }}
         >
           <AnimatedText
             el="h1"
@@ -34,6 +35,7 @@ const Landing = () => {
           initial={{ x: '-25%', opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeInOut', delay: 0.15 }}
+          viewport={{ once: true }}
         >
           <AnimatedText
             el="p"
@@ -56,7 +58,7 @@ const Landing = () => {
           />
         </motion.div>
       </div>
-    </Container>
+    </>
   );
 };
 

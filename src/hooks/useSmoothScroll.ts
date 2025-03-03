@@ -7,16 +7,21 @@ const useSmoothScroll = () => {
   useEffect(() => {
     lenisRef.current = new Lenis({
       duration: 1.5,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       gestureOrientation: 'vertical',
-      wheelMultiplier: 1,
+      wheelMultiplier: 1.5,
       touchMultiplier: 1.5,
+      smoothWheel: true,
       infinite: false,
     });
 
     function raf(time: number) {
-      lenisRef.current?.raf(time);
-      requestAnimationFrame(raf);
+      if (lenisRef.current) {
+        lenisRef.current.raf(time);
+        if (!lenisRef.current.isStopped) {
+          requestAnimationFrame(raf);
+        }
+      }
     }
     requestAnimationFrame(raf);
 
@@ -29,8 +34,6 @@ const useSmoothScroll = () => {
     const target = document.querySelector(selector);
     if (target && lenisRef.current) {
       lenisRef.current.scrollTo(target as HTMLElement);
-
-      history.pushState(null, '', `/${selector}`);
     }
   }, []);
 

@@ -3,12 +3,13 @@ import Image from 'next/image';
 import logoMC from '_svgs/logo-MC.svg';
 import {
   motion,
-  AnimatePresence,
   useScroll,
   useMotionValueEvent,
   type Variants,
 } from 'framer-motion';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import useSmoothScroll from 'src/hooks/useSmoothScroll';
 
 const navItemVariants = {
   hidden: {
@@ -34,18 +35,20 @@ const navItemVariants = {
 };
 
 const NavLinks = ({
-  onItemClick,
+  handleNavigation,
   className = '',
   itemClassName = '',
   animate = false,
+  variant,
 }: {
-  onItemClick: (selector: string) => void;
+  handleNavigation: (selector: string) => void;
   className?: string;
   itemClassName?: string;
   animate?: boolean;
+  variant: 'desktop' | 'mobile';
 }) => {
   const menuItems = [
-    { label: 'À propos', selector: '#a-propos' },
+    { label: 'Accueil', selector: '#home' },
     { label: 'Stack technique', selector: '#stack' },
     { label: 'Projets', selector: '#projets' },
   ];
@@ -54,7 +57,7 @@ const NavLinks = ({
     <ul className={className}>
       {menuItems.map((item, i) => (
         <motion.li
-          key={item.selector}
+          key={`${variant}-${item.selector}-${i}`}
           variants={navItemVariants}
           custom={i}
           initial={animate ? 'hidden' : undefined}
@@ -62,8 +65,8 @@ const NavLinks = ({
           exit={animate ? 'exit' : undefined}
         >
           <button
-            className={`p-4 whitespace-nowrap ${itemClassName}`}
-            onClick={() => onItemClick(item.selector)}
+            className={`relative p-4 whitespace-nowrap ${itemClassName}`}
+            onClick={() => handleNavigation(item.selector)}
           >
             {item.label}
           </button>
@@ -76,6 +79,8 @@ const NavLinks = ({
 const DesktopNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
   const router = useRouter();
   const [hidden, setHidden] = useState(false);
+  const navRef = useRef(null);
+
   const { scrollY } = useScroll();
   const lastYRef = useRef(0);
 
@@ -103,20 +108,22 @@ const DesktopNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
 
   return (
     <motion.nav
-      className="hidden sm:flex items-center justify-between p-6 bg-primary-dark backdrop-blur-md bg-opacity-20"
+      ref={navRef}
+      className="fixed hidden sm:flex items-center justify-between p-6 bg-opacity-0 backdrop-blur-md top-0 w-full"
       onHoverStart={() => setHidden(false)}
       animate={hidden ? 'hidden' : 'visible'}
       initial="visible"
       variants={navVariants}
       transition={{ duration: 0.3 }}
     >
-      <a href="/">
+      <Link href="/">
         <Image src={logoMC} alt="Logo du site" priority height={40} />
-      </a>
+      </Link>
       <NavLinks
-        onItemClick={handleNavigation}
+        handleNavigation={handleNavigation}
         className="flex flex-row gap-10"
         animate={true}
+        variant="desktop"
       />
     </motion.nav>
   );
@@ -158,7 +165,7 @@ const MobileNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
 
   return (
     <motion.nav
-      className="sm:hidden flex flex-col bg-primary-dark backdrop-blur-md bg-opacity-20"
+      className="fixed sm:hidden flex flex-col bg-opacity-0 backdrop-blur-md top-0 w-full"
       initial={false}
       animate={{ height: menuOpen ? '100vh' : 'auto' }}
       onTouchStart={handleTouchStart}
@@ -166,9 +173,9 @@ const MobileNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
       onTouchEnd={handleTouchEnd}
     >
       <div className="flex items-center justify-between p-6">
-        <a href="/">
+        <Link href="/">
           <Image src={logoMC} alt="Logo du site" priority height={40} />
-        </a>
+        </Link>
         <motion.button
           onClick={() => setMenuOpen(!menuOpen)}
           animate={{ rotate: menuOpen ? 360 : 0 }}
@@ -187,10 +194,11 @@ const MobileNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
           transition={{ duration: 0.3 }}
         >
           <NavLinks
-            onItemClick={handleNavigation}
+            handleNavigation={handleNavigation}
             className="flex flex-col items-center justify-center h-full gap-6"
             itemClassName="text-800 font-bold"
             animate={true}
+            variant="mobile"
           />
         </motion.div>
       )}
@@ -198,13 +206,13 @@ const MobileNav = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
   );
 };
 
-const NavBar = ({ scrollTo }: { scrollTo: (selector: string) => void }) => {
+const NavBar = () => {
+  const { scrollTo } = useSmoothScroll();
+
   return (
-    <header className={`fixed top-0 z-20 w-full`}>
-      <AnimatePresence>
-        <DesktopNav scrollTo={scrollTo} />
-        <MobileNav scrollTo={scrollTo} />
-      </AnimatePresence>
+    <header className="fixed top-0 z-20 w-full">
+      <DesktopNav scrollTo={scrollTo} />
+      <MobileNav scrollTo={scrollTo} />
     </header>
   );
 };

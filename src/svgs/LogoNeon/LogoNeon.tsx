@@ -17,7 +17,7 @@ const LogoNeon = ({ className }: { className?: string }) => {
         duration: 2.75,
         ease: 'easeInOut',
       },
-      filter: 'drop-shadow(0 0 5px #89AFC5) drop-shadow(0 0 5px #89AFC5)', // Traînée lumineuse autour du trait
+      filter: 'drop-shadow(0 0 5px #89AFC5) drop-shadow(0 0 5px #89AFC5)',
     }),
   };
 

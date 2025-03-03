@@ -5,7 +5,6 @@ export type AnimatedTextProps = {
   el?: keyof JSX.IntrinsicElements;
   className?: string;
   once?: boolean;
-  repeatDelay?: number;
   animation?: {
     hidden: Variant;
     visible: Variant;

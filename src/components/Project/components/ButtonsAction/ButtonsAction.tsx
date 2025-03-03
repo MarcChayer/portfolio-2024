@@ -21,6 +21,7 @@ const ButtonsAction = ({ projectIndex, router }: ButtonsActionProps) => {
       router.push(`/projet/${projects[projects.length - 1].id}`);
     }
   };
+
   return (
     <>
       <Button onClick={() => router.push('/')} title="Retour à l'accueil">

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import type { ProjectImagesProps } from './ProjectImages.types';
 
-// Variants pour l'animation
 const imageVariants = (delay: number) => ({
   hidden: { opacity: 0, y: 50, scale: 0.95 },
   visible: {
@@ -26,29 +25,35 @@ const ProjectImages = ({ images }: ProjectImagesProps) => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }} // L'animation commence lorsque l'élément est à 30% visible
+            viewport={{ once: true, amount: 0.3 }}
             variants={imageVariants(0)}
+            className="aspect-[4/3] relative"
           >
             <Image
               src={images.second}
               alt="Project image 1"
-              className="w-full object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover"
+              loading="lazy"
             />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={imageVariants(0.2)}
+              className="aspect-[4/3] relative"
             >
               <Image
                 src={images.third}
                 alt="Project image 2"
-                width={400}
-                height={300}
-                className="w-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
+                loading="lazy"
               />
             </motion.div>
 
@@ -56,13 +61,16 @@ const ProjectImages = ({ images }: ProjectImagesProps) => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              variants={imageVariants(0.4)}
+              variants={imageVariants(0.3)}
+              className="flex items-center justify-center relative w-full h-48"
             >
               <Image
                 src={images.logo}
                 alt="Project image 3"
-                height={330}
-                className="object-cover"
+                className="object-contain"
+                fill
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
+                loading="lazy"
               />
             </motion.div>
           </div>
@@ -75,13 +83,14 @@ const ProjectImages = ({ images }: ProjectImagesProps) => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={imageVariants(0)}
+              className="flex items-center justify-center relative w-full h-48"
             >
               <Image
                 src={images.logo}
                 alt="Project image 1"
-                width={400}
-                height={300}
-                className="w-full object-cover"
+                className="object-contain"
+                fill
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
               />
             </motion.div>
 
@@ -90,44 +99,49 @@ const ProjectImages = ({ images }: ProjectImagesProps) => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={imageVariants(0.2)}
+              className="aspect-[4/3] relative"
             >
               <Image
                 src={images.second}
                 alt="Project image 2"
-                width={400}
-                height={300}
-                className="w-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
               />
             </motion.div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <motion.div
-              className="relative w-full"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              variants={imageVariants(0.4)}
+              variants={imageVariants(0.3)}
+              className="aspect-[4/3] relative"
             >
               <Image
                 src={images.third}
                 alt="Project image 3"
-                className="object-cover w-full"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
               />
             </motion.div>
 
             {images.fourth && (
               <motion.div
-                className="relative w-full"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
-                variants={imageVariants(0.6)}
+                variants={imageVariants(0.4)}
+                className="aspect-[4/3] relative"
               >
                 <Image
                   src={images.fourth}
                   alt="Project image 4"
-                  className="object-cover w-full"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover"
                 />
               </motion.div>
             )}

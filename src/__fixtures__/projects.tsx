@@ -53,11 +53,11 @@ export type ProjectsType = {
 export const projects: ProjectsType[] = [
   {
     year: '2021',
-    id: '2',
+    id: '1',
     fullName: 'Hotel Mimado',
     technos: 'React.js - Adobe Illustrator',
     description:
-      "Conception et développement d'un site vitrine moderne pour un établissement hôtelier au Cameroun. Interface responsive développée, avec une attention particulière portée sur l'expérience utilisateur et le design.",
+      "Conception et développement d'un site vitrine moderne responsive pour un établissement hôtelier au Cameroun.",
     github: 'https://github.com/MarcChayer/hotel-Mimado',
     tag: ['web', 'design'],
     website: 'https://mimado-hotel.netlify.app/',
@@ -71,11 +71,11 @@ export const projects: ProjectsType[] = [
   },
   {
     year: '2020',
-    id: '5',
+    id: '2',
     fullName: 'TrackFit',
     technos: 'React - Node.js - PostgreSQL - Figma',
     description:
-      "Application de suivi nutritionnel et sportif développée en équipe dans le cadre de notre projet de fin de formation. Architecture construite avec React pour le front-end, Node.js pour l'API, et PostgreSQL pour la gestion des données. Mise en œuvre de fonctionnalités de tracking personnalisé.",
+      "Application de suivi nutritionnel et sportif développée en équipe dans le cadre de notre projet de fin de formation. Architecture construite avec React pour le front-end, Node.js pour l'API, et PostgreSQL pour la gestion des données.",
     tag: ['web', 'design'],
     github:
       'https://github.com/MarcChayer/TrackFit-Journal-alimentaire-et-sportif',
@@ -89,11 +89,11 @@ export const projects: ProjectsType[] = [
   },
   {
     year: '2023',
-    id: '1',
+    id: '3',
     fullName: 'ASAV',
     technos: 'Adobe Illustrator - Adobe Photoshop',
     description:
-      "Mise en de l'identité visuelle pour une entreprise spécialisée en installations thermiques et climatisation. Création d'un logo distinctif sous Illustrator, reflétant le professionnalisme et l'expertise technique de l'entreprise. Le design s'articule autour d'une approche moderne tout en conservant une lisibilité optimale sur tous les supports de communication.",
+      "Nouvelle identité visuelle pour une entreprise spécialisée en installations thermiques et climatisation. Création d'un logo distinctif sous Illustrator, le design s'articule autour d'une approche moderne tout en conservant une lisibilité optimale sur tous les supports de communication.",
     tag: ['design'],
     images: {
       first: asav1,
@@ -109,7 +109,7 @@ export const projects: ProjectsType[] = [
     fullName: 'GrayUnit',
     technos: 'Adobe Illustrator - Adobe Photoshop',
     description:
-      "Élaboration complète de la charte graphique pour une entreprise tech spécialisée en conception logicielle et formation. Création d'une identité visuelle cohérente déclinée sur l'ensemble des supports corporate (logo, cartes de visite, documents commerciaux). Design moderne et épuré traduisant l'expertise de l'entreprise.",
+      "Élaboration complète de la charte graphique pour une entreprise tech spécialisée en conception logicielle et formation. Identité visuelle cohérente déclinée sur l'ensemble des supports corporate (logo, cartes de visite, documents commerciaux).",
     tag: ['design'],
     images: {
       first: grayunit1,
@@ -120,7 +120,7 @@ export const projects: ProjectsType[] = [
   },
   {
     year: '2020',
-    id: '7',
+    id: '5',
     fullName: 'LP génie climatique',
     technos: 'Adobe Illustrator',
     description:
@@ -135,11 +135,11 @@ export const projects: ProjectsType[] = [
   },
   {
     year: '2020',
-    id: '8',
+    id: '6',
     fullName: 'Le toit de Mauzac',
     technos: 'Adobe Illustrator - Adobe Photoshop',
     description:
-      "Création d'une identité visuelle distinctive pour une entreprise de charpente traditionnelle, industrielle, centrée sur un logo symbolisant expertise et artisanat. Design alliant modernité et tradition pour refléter le savoir-faire de l'entreprise dans le domaine de la charpente.",
+      "Création d'une identité visuelle distinctive pour une entreprise de charpente traditionnelle, industrielle. Design alliant modernité et tradition pour refléter le savoir-faire de l'entreprise dans le domaine de la charpente.",
     tag: ['design'],
     images: {
       first: ltdm1,
@@ -150,11 +150,11 @@ export const projects: ProjectsType[] = [
   },
   {
     year: '2022',
-    id: '9',
+    id: '7',
     fullName: 'SCM SERVICE',
     technos: 'Adobe Illustrator',
     description:
-      "Conception de l'identité visuelle pour une entreprise de soudure et chaudronnerie. Design illustré, adapté au secteur de la métallerie, avec une attention particulière portée à la lisibilité et à l'impact visuel.",
+      'Conception du logo pour une entreprise de soudure et chaudronnerie.',
     tag: ['design'],
     images: {
       first: scm1,

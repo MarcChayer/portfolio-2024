@@ -9,13 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@studio-freight/lenis": "^1.0.42",
-    "framer-motion": "11.0.x",
-    "gsap": "^3.12.5",
+    "@studio-freight/lenis": "1.0.x",
+    "framer-motion": "12.4.x",
+    "gsap": "3.12.x",
     "next": "14.1.x",
     "react": "18.2.x",
     "react-dom": "18.2.x",
-    "sharp": "^0.33.5"
+    "sharp": "0.33.x"
   },
   "devDependencies": {
     "@types/node": "20.9.x",

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import type { ModalProps } from './Modal.types';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useRef } from 'react';
 import gsap from 'gsap';
 
 const scaleAnimation = {
@@ -26,39 +25,35 @@ const Modal = ({ modal, projects }: ModalProps) => {
   const modalContainer = useRef(null);
   const cursor = useRef(null);
 
-  useEffect(() => {
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    const { pageX, pageY } = e;
+
     if (modalContainer.current) {
-      let xMoveContainer = gsap.quickTo(modalContainer.current, 'left', {
-        duration: 0.6,
+      gsap.to(modalContainer.current, {
+        left: pageX,
+        top: pageY,
+        duration: 0.35,
         ease: 'power3',
-      });
-      let yMoveContainer = gsap.quickTo(modalContainer.current, 'top', {
-        duration: 0.6,
-        ease: 'power3',
-      });
-      window.addEventListener('mousemove', (e) => {
-        const { pageX, pageY } = e;
-        xMoveContainer(pageX);
-        yMoveContainer(pageY);
       });
     }
-    if (cursor.current) {
-      let xMoveCursor = gsap.quickTo(cursor.current, 'left', {
-        duration: 0.35,
-        ease: 'power3',
-      });
-      let yMoveCursor = gsap.quickTo(cursor.current, 'top', {
-        duration: 0.35,
-        ease: 'power3',
-      });
-      window.addEventListener('mousemove', (e) => {
-        const { pageX, pageY } = e;
 
-        xMoveCursor(pageX);
-        yMoveCursor(pageY);
+    if (cursor.current) {
+      gsap.to(cursor.current, {
+        left: pageX,
+        top: pageY,
+        duration: 0.35,
+        ease: 'power3',
       });
     }
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [handleMouseMove]);
 
   return (
     <motion.div
@@ -69,17 +64,20 @@ const Modal = ({ modal, projects }: ModalProps) => {
       className="modal-modalContainer"
     >
       <div style={{ top: index * -100 + '%' }} className="modal-modalSlider">
-        {projects.map((project, i) => {
+        {projects.map((project) => {
           const {
             images: { first },
+            id,
           } = project;
           return (
-            <div className="modal-modalContent" key={`modal_${project.id}`}>
+            <div className="modal-modalContent" key={`modal_${id}`}>
               <Image
                 src={first}
                 height={400}
                 alt={`Projet ${project.fullName}`}
-                priority
+                loading="lazy"
+                quality={80}
+                width={800}
               />
             </div>
           );

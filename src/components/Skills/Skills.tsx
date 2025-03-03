@@ -1,6 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
 import Image, { type StaticImageData } from 'next/image';
-import Container from '_components/common/Container';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 
 import react from '_svgs/react.svg';
@@ -47,7 +46,7 @@ const Skills = () => {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
 
   return (
-    <Container className="gap-20 xl:flex-row" id="stack">
+    <>
       <div className="grid grid-cols-4 gap-3 xs:translate-x-6">
         {skills.map((skill, index) => {
           const isInView = useInView(refs.current[index], { once: true });
@@ -56,13 +55,13 @@ const Skills = () => {
           return (
             <div
               key={index}
-              className={`relative ${
+              className={`cursor-clickable relative ${
                 Math.floor(index / 4) % 2 === 1 ? 'xs:-translate-x-12' : ''
               }`}
             >
               <motion.div
                 ref={refs.current[index]}
-                className="w-16 h-16 2xs:w-12 2xs:h-12 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center shadow-2xl cursor-pointer relative z-0"
+                className="w-16 h-16 2xs:w-12 2xs:h-12 md:w-20 md:h-20 bg-primary-dark bg-opacity-60 rounded-full flex items-center justify-center shadow-2xl relative z-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
@@ -73,7 +72,6 @@ const Skills = () => {
                 }}
                 whileHover={{
                   scale: 1.1,
-                  // x: [0, -3, 3, -2, 2, 0],
                   transition: {
                     duration: 0.2,
                   },
@@ -113,24 +111,24 @@ const Skills = () => {
 
       <div className="max-w-lg 2xs:max-w-md">
         <h2 className="2xs:text-800 text-950 font-bold">
-          Ma stack <span className="text-secondary">technique</span>
+          Mes <span className="text-secondary">technos</span> du quotidien
         </h2>
         <p className="mt-8 text-700 leading-7">
-          je conçois et développe des applications web dynamiques et
-          performantes avec React.js et Next.js, en exploitant TypeScript pour
-          assurer un code robuste et maintenable.
+          Je conçois et développe des applications web avec React.js, Next.js et
+          TypeScript.
         </p>
         <ul className="mt-4 pl-5 list-disc text-700 leading-7">
-          <li>Création de design systems avec Storybook</li>
-          <li>Stylisation moderne avec Tailwind CSS</li>
+          <li>Gestion de design systems avec Storybook</li>
+          <li>Stylisation avec Tailwind CSS</li>
           <li>Consommation d’API REST</li>
           <li>
-            Tests unitaires et fonctionnels avec Jest & React Testing Library
+            Écriture de tests unitaires et fonctionnels avec Jest & React
+            Testing Library
           </li>
-          <li>Utilisation de Docker et collaboration via GitLab</li>
+          <li>Utilisation de Docker et collaboration sur GitLab</li>
         </ul>
       </div>
-    </Container>
+    </>
   );
 };
 

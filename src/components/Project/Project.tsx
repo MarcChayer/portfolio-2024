@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { projects } from 'src/__fixtures__/projects';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ButtonsAction from './components/ButtonsAction';
-import Container from '_components/common/Container';
 import ProjectImages from './components/ProjectImages';
 import useSmoothScroll from 'src/hooks/useSmoothScroll';
 import ArrowDown from '_svgs/arrowDown.svg';
@@ -18,7 +17,6 @@ const Project = ({ project }: ProjectProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
-    target: ref,
     offset: ['start start', 'end start'],
   });
 
@@ -33,7 +31,7 @@ const Project = ({ project }: ProjectProps) => {
 
   return (
     <div className="Project">
-      <div ref={ref} className="relative flex flex-col items-center">
+      <div ref={ref} className="flex flex-col items-center relative">
         <motion.div
           style={{
             scale: imageScale,
@@ -46,6 +44,7 @@ const Project = ({ project }: ProjectProps) => {
             className="object-cover w-full h-full"
             src={project.images.first}
             alt={`Image du projet ${project.fullName}`}
+            loading="lazy"
           />
           <motion.button
             className="absolute inset-x-0 bottom-8 flex justify-center items-center"
@@ -71,7 +70,10 @@ const Project = ({ project }: ProjectProps) => {
         </motion.div>
       </div>
 
-      <Container className="mx-auto !pt-8" id="projectContent">
+      <div
+        className="section flex flex-col items-center justify-center min-h-screen py-32 mx-auto !pt-8 mb-52 w-4/5 lg:w-3/4"
+        id="projectContent"
+      >
         <div className="grid grid-cols-1 md:grid-cols-[2fr,4fr] gap-8 md:gap-36 w-full">
           <div>
             <p className="tracking-wide text-700 text-secondary mb-4 md:mb-10">
@@ -97,7 +99,7 @@ const Project = ({ project }: ProjectProps) => {
             <div className="flex flex-wrap gap-2">
               {project.technos.split(',').map((tech, index) => (
                 <span
-                  key={index}
+                  key={`${tech}-${index}`}
                   className="bg-purple-600 rounded-md text-700 font-medium"
                 >
                   {tech}
@@ -118,7 +120,7 @@ const Project = ({ project }: ProjectProps) => {
         <div className="flex flex-col gap-4 md:justify-between md:flex-row pt-40 w-full">
           <ButtonsAction projectIndex={projectIndex} router={router} />
         </div>
-      </Container>
+      </div>
     </div>
   );
 };
